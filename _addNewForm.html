@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <title>Add New Form</title>
+
+      <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+      <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+      <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <div class="d-flex align-items-center justify-content-center vh-100 mx-3">
+      <div class="card w-100">
+
+        <div class="card-header bg-primary text-light" style="display: flex; justify-content: space-between; align-items: center;">
+          Add New Form
+          <button class="btn btn-danger text-light" onclick="addRow()">Add Row</button>
+        </div>
+
+        <div class="card-body">
+          <form class="w-100" id="form">
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="formName">Form Name</label>
+                <input type="text" class="form-control" id="formName" placeholder="">
+              </div>
+              <div class="form-group col">
+                <label for="formReferenceId">Form Reference ID</label>
+                <input type="text" class="form-control" id="formReferenceId" placeholder="">
+              </div>
+              <div class="form-group col">
+                <label for="formIndex">Form Index</label>
+                <input type="text" class="form-control" id="formIndex" placeholder="">
+              </div>
+              <div class="form-group col">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" rows="1" placeholder=""></textarea>
+              </div>
+              <div class="form-group col">
+                <label for="formIndex">Link</label>
+                <input type="text" class="form-control" id="formLink" placeholder="">
+              </div>
+              <div class="form-group col">
+                <label for="attachment">Attachment</label>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="attachment">
+                  <label class="custom-file-label" for="attachment">Choose file</label>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="card-footer">
+          <button class="btn btn-primary" onclick="window.close(); window.opener.location.reload();">Submit</button>
+          <button class="btn btn-secondary" onclick="window.close(); window.opener.location.reload();">Cancel</button>
+        </div>
+
+      </div>
+    </div>
+
+    <script>
+      function addRow() {
+        var formRow = document.createElement("div");
+        formRow.classList.add("form-row");
+
+        var formGroup1 = document.createElement("div");
+        formGroup1.classList.add("form-group", "col");
+        var input1 = document.createElement("input");
+        input1.type = "text";
+        input1.classList.add("form-control");
+        input1.placeholder = "Form Name";
+        input1.id = "formName"; // Add ID to input field
+        formGroup1.appendChild(input1);
+
+        var formGroup2 = document.createElement("div");
+        formGroup2.classList.add("form-group", "col");
+        var input2 = document.createElement("input");
+        input2.type = "text";
+        input2.classList.add("form-control");
+        input2.placeholder = "Form Reference ID";
+        input2.id = "formReferenceId"; // Add ID to input field
+        formGroup2.appendChild(input2);
+
+        var formGroup3 = document.createElement("div");
+        formGroup3.classList.add("form-group", "col");
+        var input3 = document.createElement("input");
+        input3.type = "text";
+        input3.classList.add("form-control");
+        input3.placeholder = "Form Index";
+        input3.id = "formIndex"; // Add ID to input field
+        formGroup3.appendChild(input3);
+
+        var formGroup4 = document.createElement("div");
+        formGroup4.classList.add("form-group", "col");
+        var input4 = document.createElement("textarea");
+        input4.classList.add("form-control");
+        input4.rows = 1;
+        input4.placeholder = "Description";
+        input4.id = "description"; // Add ID to input field
+        formGroup4.appendChild(input4);
+        
+        var formGroup5 = document.createElement("div");
+        formGroup5.classList.add("form-group", "col");
+        var input5 = document.createElement("input");
+        input5.classList.add("form-control");
+        input5.rows = 1;
+        input5.placeholder = "Form Link";
+        input5.id = "formLink"; // Add ID to input field
+        formGroup5.appendChild(input5);
+
+        var formGroup6 = document.createElement("div");
+formGroup6.classList.add("form-group", "col");
+var customFileDiv = document.createElement("div");
+customFileDiv.classList.add("custom-file");
+var input6 = document.createElement("input");
+input6.classList.add("custom-file-input");
+input6.type = "file";
+input6.id = "attachment";
+input6.name = "attachment";
+var label6 = document.createElement("label");
+label6.classList.add("custom-file-label");
+label6.htmlFor = "attachment";
+label6.textContent = "Choose file";
+customFileDiv.appendChild(input6);
+customFileDiv.appendChild(label6);
+formGroup6.appendChild(customFileDiv);
+
+        formRow.appendChild(formGroup1);
+        formRow.appendChild(formGroup2);
+        formRow.appendChild(formGroup3);
+        formRow.appendChild(formGroup4);
+        formRow.appendChild(formGroup5);
+        formRow.appendChild(formGroup6);
+
+        var form = document.getElementById("form");
+        form.appendChild(formRow);
+      }
+    </script>
+    
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top"> <i class="fas fa-angle-up"></i> </a>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
+
+  </body>
+</html>
