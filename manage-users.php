@@ -60,12 +60,12 @@
 
                     <!-- DataTables Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">
-                                <button class="btn btn-outline-primary float-right" onclick="window.open('_addNewForm.html', 'popup', 'width=1200,height='+screen.availHeight); return false;">Add District</button>
-                                Manage District
-                            </h6>
-                        </div>
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>Manage District</span>
+                            <button class="btn btn-outline-primary" onclick="window.open('_addDistrict.php', 'popup', 'width=1200,height=420,top='+((screen.height - 420) / 2)+',left='+((screen.width - 1200) / 2)); return false;">Add District</button>
+                        </h6>
+                    </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
