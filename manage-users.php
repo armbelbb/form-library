@@ -62,7 +62,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">
-                                <!-- <button class="btn btn-outline-primary" onclick="window.open('_addNewForm.html', 'popup', 'width=1200,height='+screen.availHeight); return false;">Add New Form</button> -->
+                                <button class="btn btn-outline-primary float-right" onclick="window.open('_addNewForm.html', 'popup', 'width=1200,height='+screen.availHeight); return false;">Add District</button>
                                 Manage District
                             </h6>
                         </div>
