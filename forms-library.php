@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include("db_connection.php");
 ?>
 <!DOCTYPE html>
@@ -47,7 +48,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php include('_navbar.html')?>
+                <?php include('_navbar.php')?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -85,7 +86,7 @@
                                                     echo "<td>";
                                                         echo "<button class='btn btn-outline-primary'>View Form</button>";
                                                         echo "<button class='btn btn-outline-info' onclick='$(\"#updateFormModal$form[id]\").modal(\"toggle\")'>Modify</button>";
-                                                        echo "<button class='btn btn-outline-success'>View Workflow</button>";
+                                                        echo "<button class='btn btn-outline-success' onclick='$(\"#viewWorkflow$form[id]\").modal(\"toggle\")'>View Workflow</button>";
                                                         echo "<button class='btn btn-outline-danger'>Archived Form</button>";
                                                     echo "</td>";
                                                 echo "</tr>";
@@ -130,32 +131,29 @@
                                                         </div>
                                                     </div>
                                                 ";
+                                                $workflow = $form['workflow'] == "" ? "img/no_workflow.png" : "uploads/$form[workflow]";
+                                                echo "
+                                                    <div class='modal fade' id='viewWorkflow$form[id]'>
+                                                        <div class='modal-dialog modal-lg'>
+                                                            <div class='modal-content'>
+                                                                <div class='modal-header'>
+                                                                    <h4 class='modal-title font-weight-bold text-dark' id='modalTitle'>Workflow of $form[form_name] FORM</h4>
+                                                                    <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                                                    <span aria-hidden='true'>&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class='modal-body'>
+                                                                    <img src='$workflow' class='img-fluid' alt='IMAGE NOT FOUND'>
+                                                                </div>
+                                                                <div class='modal-footer'>
+                                                                    <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ";
                                             }
                                         ?>
-                                        <!--
-                                        <tr>
-                                            <td class="align-middle">Form 1</td>
-                                            <td class="align-middle">Sample 00001</td>
-                                            <td class="text-right align-middle">
-                                                <button class="btn btn-outline-primary">View Form</button>
-                                                
-                                                <button class="btn btn-outline-info" onclick="openPopup()">Modify</button>
-                                                <script>
-                                                    function openPopup() {
-                                                        var width = 1200;
-                                                        var height = 400;
-                                                        var left = (screen.width / 2) - (width / 2);
-                                                        var top = (screen.height / 2) - (height / 2);
-                                                        var features = 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
-                                                        window.open('_modifyFormFieldData.html', 'popup', features);
-                                                    }
-                                                </script>
-
-                                                <button class="btn btn-outline-success">View Workflow</button>
-                                                <button class="btn btn-outline-danger">Archived Form</button>
-                                            </td>
-                                        </tr>
-                                                -->
                                     </tbody>
                                 </table>
                             </div>
@@ -177,6 +175,16 @@
                             </button>
                         </div>
                         <div class="modal-body">
+                            <?php
+                                $sql = "SELECT * FROM forms";
+                                $forms = $conn->query($sql);
+                                $referenceID = 1;
+                                foreach($forms ?? [] as $row){
+                                    $referenceID = $row['id'] + 1;
+                                }
+                                while(strlen($referenceID) < 4)
+                                    $referenceID = "0" . $referenceID;
+                            ?>
                             <form method="POST" action="actions.php" enctype="multipart/form-data" id="addNewForm">
                                 <div class="row">
                                     <div class="form-group col-12">
@@ -185,7 +193,7 @@
                                     </div>
                                     <div class="form-group col-6">
                                         <label class="font-weight-bold text-dark" for="reference_id">FORM REFERENCE ID<ast class="text-danger">*</ast>:</label>
-                                        <input type="text" class="form-control" name="reference_id" id="reference_id" required>
+                                        <input type="text" class="form-control" name="reference_id" id="reference_id" value="<?php echo $referenceID;?>" readonly>
                                     </div>
                                     <div class="form-group col-6">
                                         <label class="font-weight-bold text-dark" for="form_index">FORM INDEX<ast class="text-danger">*</ast>:</label>
@@ -207,6 +215,14 @@
                                     <div class="form-group col-6">
                                         <label class="font-weight-bold text-dark" for="form_attachment">ATTACHMENT:</label>
                                         <input type="file" class="form-control" name="form_attachment" id="form_attachment">
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="font-weight-bold text-dark" for="thumbnail">Thumbnail:</label>
+                                        <input type="file" class="form-control" name="thumbnail" id="thumbnail">
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="font-weight-bold text-dark" for="workflow">Workflow:</label>
+                                        <input type="file" class="form-control" name="workflow" id="workflow">
                                     </div>
                                     <div class="form-group col-12">
                                         <label class="font-weight-bold text-dark" for="form_description">DESCRIPTION:</label>

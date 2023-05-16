@@ -23,7 +23,7 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" action="" method="POST">
+				<form class="login100-form validate-form" action="../actions.php" method="POST">
 					<span class="login100-form-logo">
 						<!-- <i class="zmdi zmdi-landscape"></i> -->
 						<img src="images/SchoolSource01.png" style="width: 150px;" alt="">

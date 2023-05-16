@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    include("db_connection.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +45,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php include('_navbar.html')?>
+                <?php include('_navbar.php')?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -61,23 +65,33 @@
                                             <td>Form Name</td>
                                             <td>Form Reference ID</td>
                                             <td>Requesting District</td>
+                                            <td>Date Requested</td>
                                             <td class="text-center">Actions</td>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <!-- Ikaw na bahala maglaag didi men sin loop sa db -->
-                                            <td class="align-middle">Form 1</td>
-                                            <td class="align-middle">Sample 00001</td>
-                                            <td class="align-middle">Sample District 00001</td>
-                                            <td class="text-right align-middle">
-                                                <button class="btn btn-outline-primary">COMPLETED</button>
-                                                <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#reportModal">
-                                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                    REPORT / CONCERN
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        <?php
+                                            $sql = "SELECT A.*, B.*, C.* 
+                                                    FROM form_requests as A 
+                                                    LEFT JOIN forms as B ON B.id = A.form_id 
+                                                    LEFT JOIN accounts as C ON C.id = A.account_id";
+                                            $requests = $conn->query($sql);
+                                            foreach($requests as $request){
+                                                echo "<tr>";
+                                                    echo "<td>$request[form_name]</td>";
+                                                    echo "<td>$request[reference_id]</td>";
+                                                    echo "<td>$request[display_name]</td>";
+                                                    echo "<td>" . date('F d, Y  g:i:A', strtotime($request['request_date'])) . "</td>";
+                                                    echo "<td>";
+                                                        echo "<button class='btn btn-outline-primary'>VIEW</button>";
+                                                        echo "<a class='btn btn-danger' data-toggle='modal' data-target='#reportModal'>";
+                                                            echo "<i class='fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>";
+                                                            echo "CANCEL REQUEST";
+                                                        echo "</a>";
+                                                    echo "</td>";
+                                                echo "</tr>";
+                                            }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

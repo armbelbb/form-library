@@ -38,7 +38,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php include('_navbar.html')?>
+                <?php include('_navbar.php')?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->

@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include("db_connection.php");
 ?>
 <!DOCTYPE html>
@@ -44,7 +45,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php include('_navbar.html')?>
+                <?php include('_navbar.php')?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -76,7 +77,17 @@
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                    $sql = "SELECT * FROM forms";
+                                                    if(isset($_POST['category_id']) && $_POST['category_id'] != 'ALL'){
+                                                        $sql = "SELECT A.*, B.category_name 
+                                                                FROM forms as A 
+                                                                LEFT JOIN categories as B ON B.id = A.category_id 
+                                                                WHERE A.category_id = $_POST[category_id]";
+                                                    }
+                                                    else{
+                                                        $sql = "SELECT A.*, B.category_name 
+                                                                FROM forms as A 
+                                                                LEFT JOIN categories as B ON B.id = A.category_id";
+                                                    }
                                                     $forms = $conn->query($sql);
                                                     foreach($forms as $form){
                                                         echo "<tr>";
@@ -84,9 +95,30 @@
                                                             echo "<td class='align-middle'>$form[reference_id]</td>";
                                                             echo "<td class='text-right'>";
                                                                 echo "<button class='btn btn-outline-primary'>View Form</button>&nbsp";
-                                                                echo "<button class='btn btn-outline-success'>View Workflow</button>";
+                                                                echo "<button class='btn btn-outline-success' onclick='$(\"#viewWorkflow$form[id]\").modal(\"toggle\")'>View Workflow</button>";
                                                             echo "</td>";
                                                         echo "</tr>";
+                                                        $workflow = $form['workflow'] == "" ? "img/no_workflow.png" : "uploads/$form[workflow]";
+                                                        echo "
+                                                            <div class='modal fade' id='viewWorkflow$form[id]'>
+                                                                <div class='modal-dialog modal-lg'>
+                                                                    <div class='modal-content'>
+                                                                        <div class='modal-header'>
+                                                                            <h4 class='modal-title font-weight-bold text-dark' id='modalTitle'>Workflow of $form[form_name] FORM</h4>
+                                                                            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                                                            <span aria-hidden='true'>&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class='modal-body'>
+                                                                            <img src='$workflow' class='img-fluid' alt='IMAGE NOT FOUND'>
+                                                                        </div>
+                                                                        <div class='modal-footer'>
+                                                                            <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        ";
                                                     }
                                                 ?>
                                             </tbody>

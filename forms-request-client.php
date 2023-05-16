@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    include("db_connection.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,6 +27,9 @@
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="vendor/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
 </head>
 
 <body id="page-top">
@@ -41,7 +48,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php include('_navbar.html')?>
+                <?php include('_navbar.php')?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -65,29 +72,43 @@
                                         <tr>
                                             <td>Form Name</td>
                                             <td>Form Reference ID</td>
+                                            <td>Status</td>
+                                            <td>Date Requested</td>
+                                            <td>Date Last Updated</td>
                                             <td class="text-center">Actions</td>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <!-- Ikaw na bahala maglaag didi men sin loop sa db -->
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="form1Checkbox">
-                                                    <label class="form-check-label" for="form1Checkbox">
-                                                    Form 1
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td>Sample 00001</td> 
-                                            <td class="text-right">
-                                                <button class="btn btn-outline-primary">VIEW</button>
-                                                <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#reportModal">
-                                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                    CANCEL REQUEST
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        <?php
+                                            $sql = "SELECT A.*, B.* 
+                                                    FROM form_requests as A 
+                                                    LEFT JOIN forms as B ON B.id = A.form_id 
+                                                    WHERE A.account_id = $_SESSION[account_id]";
+                                            $requests = $conn->query($sql);
+                                            foreach($requests as $request){
+                                                echo "<tr>";
+                                                    echo "<td>";
+                                                        echo " <div class='form-check'>";
+                                                            echo "<input class='form-check-input' type='checkbox' value='' id='form1Checkbox$request[id]'>";
+                                                            echo "<label class='form-check-label' for='form1Checkbox'>";
+                                                                echo "$request[form_name]";
+                                                            echo "</label>";
+                                                        echo " </div>";
+                                                    echo "</td>";
+                                                    echo "<td>$request[reference_id]</td>";
+                                                    echo "<td>$request[status]</td>";
+                                                    echo "<td>" . date('F d, Y  g:i:A', strtotime($request['request_date'])) . "</td>";
+                                                    echo "<td>" . date('F d, Y  g:i:A', strtotime($request['last_update_date'])) . "</td>";
+                                                    echo "<td>";
+                                                        echo "<button class='btn btn-outline-primary'>VIEW</button>";
+                                                        echo "<a class='btn btn-danger' data-toggle='modal' data-target='#reportModal'>";
+                                                            echo "<i class='fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>";
+                                                            echo "CANCEL REQUEST";
+                                                        echo "</a>";
+                                                    echo "</td>";
+                                                echo "</tr>";
+                                            }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -114,6 +135,7 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+    <button type="button" class="swalSuccess" id="swalSuccess">HIDDEN BTN</button>
 
     <!-- Logout Modal-->
     <?php include('_modal-logout.html')?>
@@ -128,6 +150,31 @@
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="js/greed/datatables-greed.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="vendor/sweetalert2/sweetalert2.min.js"></script>
+    <script>
+        $(function() {
+            var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+            });
+            $('.swalSuccess').click(function() {
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Form successfully requested.'
+                })
+            });
+        });
+
+        $(document).ready(function(){
+            <?php
+                if(isset($_GET['success']))
+                    echo '$("#swalSuccess").trigger("click");';
+            ?>
+        });
+    </script>
 </body>
 
 </html>

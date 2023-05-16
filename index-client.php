@@ -1,9 +1,9 @@
 <?php
     session_start();
-    // if (!isset($_SESSION['user_id'])) {
-    //     header('Location: login.html');
-    //     exit();
-    // } 
+    include("db_connection.php");
+    if (!isset($_SESSION['account_id'])) {
+        header('Location: login/index.php');
+    } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +42,7 @@
             <!-- Main Content -->
             <div id="content">
                 <!-- Topbar -->
-                <?php include('_navbar.html')?>
+                <?php include('_navbar.php')?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -52,21 +52,21 @@
                             <!-- this is the first column -->
                             <div class="col-md-9">
                                 <div class="row mb-5">
-                                    <?php include('_forms-mostused.html')?>
+                                    <?php include('_forms-mostused.php')?>
                                 </div>
                                 <h3>Most Used Forms</h3>
 
                                 <hr class="mb-5">
 
                                 <div class="row">
-                                    <?php include('_forms-latest.html')?>
+                                    <?php include('_forms-latest.php')?>
                                 </div>
                                 <h3>Latest Forms</h3>
                             </div>
                             <!-- this is the 2nd column -->
                             <div class="col-md-3">
                                 <div class="row mb-5">
-                                    <?php include('_categorylist-client.html')?>
+                                    <?php include('_categorylist-client.php')?>
                                 </div>
                                 <div class="row">
                                     <?php include('_forms-neednew.html')?>

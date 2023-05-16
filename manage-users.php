@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['account_id'])) {
+        header('Location: login/index.php');
+        exit();
+    } 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +48,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <?php include('_navbar.html')?>
+                <?php include('_navbar.php')?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
