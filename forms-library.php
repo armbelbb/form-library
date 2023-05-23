@@ -55,14 +55,15 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">SST Forms</h1>
-                    <p class="mb-4"></p>
+                    <!-- <h1 class="h3 mb-2 text-gray-800">SST Forms</h1>
+                    <p class="mb-4"></p> -->
 
                     <!-- DataTables Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">
-                                <button class="btn btn-outline-primary" onclick="$('#addNewFormModal').modal('toggle')">Add New Form</button>
+                            <h6 class="m-0 font-weight-bold text-primary" style="display: flex; justify-content: space-between; align-items: center;">
+                                <span> SST Forms </span>
+                                <button class="btn btn-outline-primary float-right" onclick="$('#addNewFormModal').modal('toggle')">Add New Form</button>
                             </h6>
                         </div>
                         <div class="card-body">

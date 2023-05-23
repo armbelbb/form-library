@@ -57,6 +57,10 @@
                                 </div>
                                 <div class='modal-footer'>
                                     <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                                    <div class='ml-auto'>
+                                        <button type='button' class='btn btn-danger'>View Workflow</button>
+                                        <button type='button' class='btn btn-primary'>Request Form</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

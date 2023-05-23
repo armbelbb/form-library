@@ -23,7 +23,7 @@
       <div class="card w-100">
 
         <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
-            <h6 class="m-0 font-weight-bold text-primary">Modify Users Data</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Add New District</h6>
         </div>
 
         <div class="card-body">
