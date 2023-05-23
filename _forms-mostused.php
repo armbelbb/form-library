@@ -59,9 +59,10 @@
                                     </div>
                                 </div>
                                 <div class='modal-footer'>
-                                    <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
-                                    <button type='button' class='btn btn-primary' onclick='loadRequestModal($form[id])'>Request Form</button>
-                                </div>
+                                    <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>";
+                                    if($_SESSION['type'] == 'Client')
+                                    echo "<button type='button' class='btn btn-primary' onclick='loadRequestModal($form[id])'>Request Form</button>";
+                                echo "</div>
                             </div>
                         </div>
                     </div>
