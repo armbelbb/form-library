@@ -11,7 +11,7 @@
                 <form method="POST" action="actions.php" id="requestForm">
                     <div class="row">
                         <div class="form-group col-7">
-                            <label class="font-weight-bold text-dark" for="form_category">FORM CATEGORY<ast class="text-danger">*</ast>:</label>
+                            <label class="font-weight-bold text-dark" for="form_category">FORM NAME<ast class="text-danger">*</ast>:</label>
                             <select class="form-control" name="form_id" id="form_id" required>
                                 <option value="" selected disabled>Choose an option</option>
                                 <?php
@@ -33,6 +33,7 @@
                                 ?>
                             </select>
                         </div>
+                        <input type="hidden" name="form_id" id="form_id2" disabled>
                         <div class="form-group col-7">
                             <label class="font-weight-bold text-dark" for="district_name">DISTRICT NAME<ast class="text-danger">*</ast>:</label>
                             <input type="text" class="form-control" name="district_name" id="district_name" value="<?php echo $_SESSION['display_name'];?>" readonly>
@@ -94,9 +95,16 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <button class="btn btn-primary w-100" onclick="$('#requestNewFormModal').modal('show')">Request Forms</button>
+                <button class="btn btn-primary w-100" onclick="resetRequestModal()">Request Forms</button>
             </div>
         </div>
     </div>
   </footer>
 </div>
+<script>
+    function resetRequestModal(){
+        $('#form_id2').prop('disabled', 'disabled');
+        $('#form_id').prop('disabled', false);
+        $("#requestNewFormModal").modal("toggle");
+    }
+</script>

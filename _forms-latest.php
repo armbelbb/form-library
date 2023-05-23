@@ -52,6 +52,9 @@
                                             <label class='font-weight-bold text-dark'>ATTACHMENT<ast class='text-danger'></ast>: <a href='uploads/$form[attachment]' target='_blank'>$attachment</a></label>
                                         </div>
                                         <div class='form-group col-12'>
+                                            <label class='font-weight-bold text-dark'><a href='$form[link]' target='_blank'>FORM LINK</a></label>
+                                        </div>
+                                        <div class='form-group col-12'>
                                             <label class='font-weight-bold text-dark'>WORKFLOW<ast class='text-danger'></ast>: $form[category_name]</label>
                                             <img src='$workflow' class='img-fluid' alt='IMAGE NOT FOUND'>
                                         </div>
@@ -59,6 +62,7 @@
                                 </div>
                                 <div class='modal-footer'>
                                     <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                                    <button type='button' class='btn btn-primary' onclick='loadRequestModal($form[id])'>Request Form</button>
                                 </div>
                             </div>
                         </div>

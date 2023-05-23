@@ -60,6 +60,7 @@
                                 </div>
                                 <div class='modal-footer'>
                                     <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                                    <button type='button' class='btn btn-primary' onclick='loadRequestModal($form[id])'>Request Form</button>
                                 </div>
                             </div>
                         </div>
@@ -69,3 +70,12 @@
         ?>
     </div>
 </div>
+<script>
+    function loadRequestModal(formId){
+        $('#form_id option[value=' + formId + ']').attr('selected','selected');
+        $('#form_id2').val($('#form_id').val());
+        $('#form_id2').prop('disabled', false);
+        $('#form_id').prop('disabled', 'disabled');
+        $("#requestNewFormModal").modal("toggle");
+    }
+</script>
