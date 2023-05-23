@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <form method="POST" action="actions.php" id="requestForm">
                     <div class="row">
-                        <div class="form-group col-6">
+                        <div class="form-group col-7">
                             <label class="font-weight-bold text-dark" for="form_category">FORM CATEGORY<ast class="text-danger">*</ast>:</label>
                             <select class="form-control" name="form_id" id="form_id" required>
                                 <option value="" selected disabled>Choose an option</option>
@@ -32,6 +32,26 @@
                                     }
                                 ?>
                             </select>
+                        </div>
+                        <div class="form-group col-7">
+                            <label class="font-weight-bold text-dark" for="district_name">DISTRICT NAME<ast class="text-danger">*</ast>:</label>
+                            <input type="text" class="form-control" name="district_name" id="district_name" value="<?php echo $_SESSION['display_name'];?>" readonly>
+                        </div>
+                        <div class="form-group col-7">
+                            <label class="font-weight-bold text-dark" for="requestor_email">EMAIL<ast class="text-danger">*</ast>:</label>
+                            <input type="email" class="form-control" name="requestor_email" id="requestor_email" required>
+                        </div>
+                        <div class="form-group col-7">
+                            <label class="font-weight-bold text-dark" for="requestor_name">NAME<ast class="text-danger">*</ast>:</label>
+                            <input type="text" class="form-control" name="requestor_name" id="requestor_name" required>
+                        </div>
+                        <div class="form-group col-7">
+                            <label class="font-weight-bold text-dark" for="phone_number">PHONE NUMBER<ast class="text-danger">*</ast>:</label>
+                            <input type="text" class="form-control" name="phone_number" id="phone_number" required>
+                        </div>
+                        <div class="form-group col-12">
+                            <label class="font-weight-bold text-dark" for="request_notes">NOTES:</label>
+                            <textarea class="form-control" name="request_notes" id="request_notes"></textarea>
                         </div>
                     </div>
                 </form>

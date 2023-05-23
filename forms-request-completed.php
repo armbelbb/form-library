@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include("db_connection.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +26,8 @@
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="vendor/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 
 </head>
 
@@ -67,12 +70,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <!-- Ikaw na bahala maglaag didi men sin loop sa db -->
-                                            <td class="align-middle">Form 1</td>
-                                            <td class="align-middle">Sample 00001</td>
-                                            <td class="align-middle">Sample District 00001</td>
-                                        </tr>
+                                        <?php
+                                            $sql = "SELECT A.*, B.*, C.* 
+                                                        FROM form_requests as A 
+                                                        LEFT JOIN forms as B ON B.id = A.form_id 
+                                                        LEFT JOIN accounts as C ON C.id = A.account_id 
+                                                        WHERE A.status = 'Completed'";
+                                            $requests = $conn->query($sql);
+                                            foreach($requests as $request){
+                                                echo "<tr>";
+                                                    if($request['form_id'] == -1){
+                                                        echo "<td class='align-middle'>NEW FORM REQUEST</td>";
+                                                        echo "<td class='align-middle'>N/A</td>";
+                                                    }
+                                                    else{
+                                                        echo "<td class='align-middle'>$request[form_name]</td>";
+                                                        echo "<td class='align-middle'>$request[reference_id]</td>";
+                                                    }
+                                                    echo "<td class='align-middle'>$request[display_name]</td>";
+                                                echo "</tr>";
+                                            }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -98,11 +116,12 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+    <button type="button" class="swalComplete" id="swalComplete" hidden>HIDDEN BTN</button>
 
     <!-- Logout Modal-->
     <?php include('_modal-logout.html')?>
     <!-- Report /  Concern Modal -->
-    <?php include('_modal-reportConcern.html')?>
+    <?php include('_modal-reportConcern.php')?>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -112,6 +131,31 @@
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="js/greed/datatables-greed.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="vendor/sweetalert2/sweetalert2.min.js"></script>
+    <script>
+        $(function() {
+            var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+            });
+            $('.swalComplete').click(function() {
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Request succesfully completed.'
+                })
+            });
+        });
+
+        $(document).ready(function(){
+            <?php
+                if(isset($_GET['complete']))
+                    echo '$("#swalComplete").trigger("click");';
+            ?>
+        });
+    </script>
 </body>
 
 </html>

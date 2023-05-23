@@ -94,11 +94,49 @@
                                                             echo "<td class='align-middle'>$form[form_name]</td>";
                                                             echo "<td class='align-middle'>$form[reference_id]</td>";
                                                             echo "<td class='text-right'>";
-                                                                echo "<button class='btn btn-outline-primary'>View Form</button>&nbsp";
-                                                                echo "<button class='btn btn-outline-success' onclick='$(\"#viewWorkflow$form[id]\").modal(\"toggle\")'>View Workflow</button>";
+                                                                echo "<button class='btn btn-outline-primary' onclick='$(\"#viewFormModal$form[id]\").modal(\"toggle\")'>View Form</button>&nbsp";
+                                                                // echo "<button class='btn btn-outline-success' onclick='$(\"#viewWorkflow$form[id]\").modal(\"toggle\")'>View Workflow</button>";
                                                             echo "</td>";
                                                         echo "</tr>";
                                                         $workflow = $form['workflow'] == "" ? "img/no_workflow.png" : "uploads/$form[workflow]";
+                                                        echo "
+                                                            <div class='modal fade' id='viewFormModal$form[id]'>
+                                                                <div class='modal-dialog modal-lg'>
+                                                                    <div class='modal-content'>
+                                                                        <div class='modal-header'>
+                                                                            <h4 class='modal-title font-weight-bold text-dark' id='modalTitle'>$form[form_name] FORM</h4>
+                                                                            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                                                            <span aria-hidden='true'>&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class='modal-body'>
+                                                                            <div class='row'>
+                                                                                <div class='form-group col-12'>
+                                                                                    <label class='font-weight-bold text-dark'>FORM REFERENCE ID<ast class='text-danger'></ast>: $form[reference_id]</label>
+                                                                                </div>
+                                                                                <div class='form-group col-12'>
+                                                                                    <label class='font-weight-bold text-dark'>FORM INDEX<ast class='text-danger'></ast>: $form[form_index]</label>
+                                                                                </div>
+                                                                                <div class='form-group col-12'>
+                                                                                    <label class='font-weight-bold text-dark'>FORM CATEGORY<ast class='text-danger'></ast>: $form[category_name]</label>
+                                                                                </div>
+                                                                                <div class='form-group col-12'>
+                                                                                    <label class='font-weight-bold text-dark'>DESCRIPTION:</label>
+                                                                                    <textarea class='form-control' rows='3' name='form_description' readonly>$form[form_description]</textarea>
+                                                                                </div>
+                                                                                <div class='form-group col-12'>
+                                                                                    <label class='font-weight-bold text-dark'>WORKFLOW<ast class='text-danger'></ast>: $form[category_name]</label>
+                                                                                    <img src='$workflow' class='img-fluid' alt='IMAGE NOT FOUND'>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class='modal-footer'>
+                                                                            <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        ";
                                                         echo "
                                                             <div class='modal fade' id='viewWorkflow$form[id]'>
                                                                 <div class='modal-dialog modal-lg'>
@@ -132,7 +170,7 @@
                                 <?php include('_categorylist-client.php')?>
                             </div>
                             <div class="row">
-                                <?php include('_forms-neednew.html')?>
+                                <?php include('_forms-neednew.php')?>
                             </div>
                         </div>
                     </div>

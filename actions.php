@@ -85,15 +85,53 @@
 
     if(isset($_POST["requestForm"])){
         $today = date('Y-m-d H:i:s');
+        if(isset($_POST['form_id']))
+            $formID = $_POST['form_id'];
+        else
+            $formID = -1;
         $sql = "INSERT INTO form_requests VALUES(
                 id, 
-                $_POST[form_id],
+                $formID,
                 $_SESSION[account_id],
+                '$_POST[requestor_email]',
+                '$_POST[requestor_name]',
+                '$_POST[phone_number]',
+                '$_POST[request_notes]',
                 '$today',
                 '$today',
                 'Pending'
             )";
         $conn->query($sql);
         header("Location: forms-request-client.php?success=1");
+    }
+
+    if(isset($_POST["cancelRequest"])){
+        $sql = "UPDATE form_requests SET 
+                status = 'Canceled' 
+                WHERE id = $_POST[form_request_id]";
+        $conn->query($sql);
+        header("Location: forms-request-client.php?canceled=1");
+    }
+
+    if(isset($_POST["completeRequest"])){
+        $sql = "UPDATE form_requests SET 
+                status = 'Completed' 
+                WHERE id = $_POST[form_request_id]";
+        $conn->query($sql);
+        header("Location: forms-request-completed.php?complete=1");
+    }
+
+    if(isset($_POST["reportRequest"])){
+        $sql = "UPDATE form_requests SET 
+                status = 'Reported' 
+                WHERE id = $_POST[form_request_id]";
+        $conn->query($sql);
+        $sql = "INSERT INTO form_request_reports VALUES(
+                id,
+                $_POST[form_request_id],
+                '$_POST[request_concerns]'
+            )";
+        $conn->query($sql);
+        header("Location: forms-request.php?reported=1");
     }
 ?>

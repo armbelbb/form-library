@@ -80,7 +80,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $sql = "SELECT A.*, B.* 
+                                            $sql = "SELECT A.id as form_request_id,A.*, B.* 
                                                     FROM form_requests as A 
                                                     LEFT JOIN forms as B ON B.id = A.form_id 
                                                     WHERE A.account_id = $_SESSION[account_id]";
@@ -91,22 +91,70 @@
                                                         echo " <div class='form-check'>";
                                                             echo "<input class='form-check-input' type='checkbox' value='' id='form1Checkbox$request[id]'>";
                                                             echo "<label class='form-check-label' for='form1Checkbox'>";
-                                                                echo "$request[form_name]";
+                                                                if($request['form_id'] == -1)
+                                                                    echo "NEW FORM REQUEST";
+                                                                else
+                                                                    echo "$request[form_name]";
                                                             echo "</label>";
                                                         echo " </div>";
                                                     echo "</td>";
+                                                    if($request['form_id'] == -1)
+                                                        echo "<td>N/A</td>";
+                                                    else
                                                     echo "<td>$request[reference_id]</td>";
                                                     echo "<td>$request[status]</td>";
                                                     echo "<td>" . date('F d, Y  g:i:A', strtotime($request['request_date'])) . "</td>";
                                                     echo "<td>" . date('F d, Y  g:i:A', strtotime($request['last_update_date'])) . "</td>";
                                                     echo "<td>";
-                                                        echo "<button class='btn btn-outline-primary'>VIEW</button>";
-                                                        echo "<a class='btn btn-danger' data-toggle='modal' data-target='#reportModal'>";
-                                                            echo "<i class='fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>";
-                                                            echo "CANCEL REQUEST";
-                                                        echo "</a>";
+                                                        echo "<button class='btn btn-outline-primary' onclick='$(\"#viewRequestModal$request[form_request_id]\").modal(\"toggle\")'>VIEW</button>";
+                                                        if($request['status'] == 'Pending'){
+                                                            echo "<a class='btn btn-danger' data-toggle='modal' data-target='#reportModal' onclick='$(\"#form_request_id\").val(\"$request[form_request_id]\")'>";
+                                                                echo "<i class='fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>";
+                                                                echo "CANCEL REQUEST";
+                                                            echo "</a>";
+                                                        }
                                                     echo "</td>";
                                                 echo "</tr>";
+                                                echo "
+                                                    <div class='modal fade' id='viewRequestModal$request[form_request_id]'>
+                                                        <div class='modal-dialog modal-lg'>
+                                                            <div class='modal-content'>
+                                                                <div class='modal-header'>
+                                                                    <h4 class='modal-title font-weight-bold text-dark' id='modalTitle'>FORM REQUEST</h4>
+                                                                    <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                                                    <span aria-hidden='true'>&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class='modal-body'>
+                                                                    <div class='row'>
+                                                                        <div class='form-group col-12'>";
+                                                                            if($request['form_id'] == -1)
+                                                                                echo "<label class='font-weight-bold text-dark'>FORM NAME<ast class='text-danger'></ast>: NEW FORM REQUEST</label>";
+                                                                            else
+                                                                                echo "<label class='font-weight-bold text-dark'>FORM NAME<ast class='text-danger'></ast>: $request[form_name]</label>";
+                                                                        echo "</div>
+                                                                        <div class='form-group col-12'>
+                                                                            <label class='font-weight-bold text-dark'>EMAIL<ast class='text-danger'></ast>: $request[requestor_email]</label>
+                                                                        </div>
+                                                                        <div class='form-group col-12'>
+                                                                            <label class='font-weight-bold text-dark'>NAME<ast class='text-danger'></ast>: $request[requestor_name]</label>
+                                                                        </div>
+                                                                        <div class='form-group col-12'>
+                                                                            <label class='font-weight-bold text-dark'>PHONE NUMBER<ast class='text-danger'></ast>: $request[phone_number]</label>
+                                                                        </div>
+                                                                        <div class='form-group col-12'>
+                                                                            <label class='font-weight-bold text-dark'>NOTES:</label>
+                                                                            <textarea class='form-control' rows='3' name='form_description' readonly>$request[request_notes]</textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class='modal-footer'>
+                                                                    <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ";
                                             }
                                         ?>
                                     </tbody>
@@ -136,11 +184,12 @@
         <i class="fas fa-angle-up"></i>
     </a>
     <button type="button" class="swalSuccess" id="swalSuccess">HIDDEN BTN</button>
+    <button type="button" class="swalCancel" id="swalCancel">HIDDEN BTN</button>
 
     <!-- Logout Modal-->
     <?php include('_modal-logout.html')?>
     <!-- Report /  Concern Modal -->
-    <?php include('_modal-reportConcern.html')?>
+    <?php include('_modal-reportConcern.php')?>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -168,10 +217,27 @@
             });
         });
 
+        $(function() {
+            var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+            });
+            $('.swalCancel').click(function() {
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Form Request cancelled.'
+                })
+            });
+        });
+
         $(document).ready(function(){
             <?php
                 if(isset($_GET['success']))
                     echo '$("#swalSuccess").trigger("click");';
+                if(isset($_GET['canceled']))
+                    echo '$("#swalCancel").trigger("click");';
             ?>
         });
     </script>

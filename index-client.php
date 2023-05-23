@@ -69,7 +69,7 @@
                                     <?php include('_categorylist-client.php')?>
                                 </div>
                                 <div class="row">
-                                    <?php include('_forms-neednew.html')?>
+                                    <?php include('_forms-neednew.php')?>
                                 </div>
                             </div>
                         </div>

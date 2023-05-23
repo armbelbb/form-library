@@ -20,7 +20,6 @@
                 echo "<div class='col-sm-4 text-center'>";
                     echo "<img src='$thumbnail' alt='$form[form_index]' class='img-thumbnail' style='object-fit: cover; height: 250px;' onclick='$(\"#updateFormModal$form[id]\").modal(\"toggle\")'>";
                     echo "<h3><a href='$form[link]' target='_blank'>$form[form_name]</a></h3>";
-                    echo "<p class='text-justify'>$form[form_description]</p>";
                 echo "</div>";
                 echo "
                     <div class='modal fade' id='updateFormModal$form[id]'>

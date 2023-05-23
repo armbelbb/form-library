@@ -52,24 +52,24 @@
                         <!-- this is the first column -->
                         <div class="col-md-9">
                             <div class="row mb-5">
-                                <?php include('_forms-mostused.html')?>
+                                <?php include('_forms-mostused.php')?>
                             </div>
                             <h3>Most Used Forms</h3>
 
                             <hr class="mb-5">
 
                             <div class="row">
-                                <?php include('_forms-latest.html')?>
+                                <?php include('_forms-latest.php')?>
                             </div>
                             <h3>Latest Forms</h3>
                         </div>
                         <!-- this is the 2nd column -->
                         <div class="col-md-3">
                             <div class="row mb-5">
-                                <?php include('_categorylist.html')?>
+                                <?php include('_categorylist.php')?>
                             </div>
                             <div class="row">
-                                <?php include('_forms-neednew.html')?>
+                                <?php include('_forms-neednew.php')?>
                             </div>
                         </div>
                     </div>
