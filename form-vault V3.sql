@@ -14,8 +14,8 @@
 
 
 -- Dumping database structure for form_vault
-CREATE DATABASE IF NOT EXISTS `form_vault` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `form_vault`;
+-- CREATE DATABASE IF NOT EXISTS `form_vault` /*!40100 DEFAULT CHARACTER SET latin1 */;
+-- USE `form_vault`;
 
 -- Dumping structure for table form_vault.accounts
 CREATE TABLE IF NOT EXISTS `accounts` (

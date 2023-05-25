@@ -16,7 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SST Admin Form Library</title>
+    <title>SST Admin Form Library Manage Users</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -63,7 +63,7 @@
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary" style="display: flex; justify-content: space-between; align-items: center;">
                             <span>Manage District</span>
-                            <button class="btn btn-outline-primary" onclick="window.open('_addDistrict.php', 'popup', 'width=1200,height=420,top='+((screen.height - 420) / 2)+',left='+((screen.width - 1200) / 2)); return false;">Add District</button>
+                            <button class="btn btn-outline-primary" onclick="window.open('_addDistrict.php', 'popup', 'width=1200,height=420,top='+((screen.height - 420) / 2)+',left='+((screen.width - 1200) / 2)); return false;">Add Users</button>
                         </h6>
                     </div>
                         <div class="card-body">
