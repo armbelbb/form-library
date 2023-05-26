@@ -38,7 +38,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php include('_sidebar.html')?>
+        <?php include('_sidebar.php')?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -80,7 +80,8 @@
                                         <?php
                                             $sql = "SELECT A.*, B.category_name 
                                                     FROM forms as A 
-                                                    LEFT JOIN categories as B ON B.id = A.category_id";
+                                                    LEFT JOIN categories as B ON B.id = A.category_id 
+                                                    WHERE A.status = 'Active'";
                                             $forms = $conn->query($sql);
                                             foreach($forms as $form){
                                                 $workflow = $form['workflow'] == "" ? "img/no_workflow.png" : "uploads/$form[workflow]";
@@ -89,10 +90,9 @@
                                                     echo "<td class='align-middle'>$form[form_name]</td>";
                                                     echo "<td class='align-middle'>$form[reference_id]</td>";
                                                     echo "<td>";
-                                                        echo "<button class='btn btn-outline-primary' onclick='$(\"#viewFormModal$form[id]\").modal(\"toggle\")'>View Form</button>";
-                                                        echo "<button class='btn btn-outline-info' onclick='$(\"#updateFormModal$form[id]\").modal(\"toggle\")'>Modify</button>";
-                                                        // echo "<button class='btn btn-outline-success' onclick='$(\"#viewWorkflow$form[id]\").modal(\"toggle\")'>View Workflow</button>";
-                                                        echo "<button class='btn btn-outline-danger'>Archived Form</button>";
+                                                        echo "<button class='btn btn-outline-primary' onclick='$(\"#viewFormModal$form[id]\").modal(\"toggle\")'>View Form</button>&nbsp";
+                                                        echo "<button class='btn btn-outline-info' onclick='$(\"#updateFormModal$form[id]\").modal(\"toggle\")'>Modify</button>&nbsp";
+                                                        echo "<button class='btn btn-outline-danger' onclick='$(\"#archiveFormModal$form[id]\").modal(\"toggle\")'>Archive Form</button>";
                                                     echo "</td>";
                                                 echo "</tr>";
                                                 echo "
@@ -178,20 +178,25 @@
                                                     </div>
                                                 ";
                                                 echo "
-                                                    <div class='modal fade' id='viewWorkflow$form[id]'>
+                                                    <div class='modal fade' id='archiveFormModal$form[id]'>
                                                         <div class='modal-dialog modal-lg'>
                                                             <div class='modal-content'>
                                                                 <div class='modal-header'>
-                                                                    <h4 class='modal-title font-weight-bold text-dark' id='modalTitle'>Workflow of $form[form_name] FORM</h4>
+                                                                    <h4 class='modal-title font-weight-bold text-dark' id='modalTitle'>$form[form_name]</h4>
                                                                     <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
                                                                     <span aria-hidden='true'>&times;</span>
                                                                     </button>
                                                                 </div>
                                                                 <div class='modal-body'>
-                                                                    <img src='$workflow' class='img-fluid' alt='IMAGE NOT FOUND'>
+                                                                    <h2>Are you sure you want to archive this form?</h2>
+                                                                    <form method='POST' action='actions.php' id='archiveForm$form[id]'>
+                                                                        <input type='hidden' name='form_id' value='$form[id]' required>
+                                                                        <input type='hidden' name='status' value='Archived' required>
+                                                                    </form>
                                                                 </div>
                                                                 <div class='modal-footer'>
-                                                                    <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                                                                    <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+                                                                    <button type='submit' form='archiveForm$form[id]' name='archiveForm' class='btn btn-danger'>Archive</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -303,8 +308,9 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-    <button type="button" class="swalSuccess" id="swalSuccess">HIDDEN BTN</button>
-    <button type="button" class="swalEdit" id="swalEdit">HIDDEN BTN</button>
+    <button type="button" hidden class="swalSuccess" id="swalSuccess">HIDDEN BTN</button>
+    <button type="button" hidden class="swalEdit" id="swalEdit">HIDDEN BTN</button>
+    <button type="button" hidden class="swalArchive" id="swalArchive">HIDDEN BTN</button>
 
     <!-- Logout Modal-->
     <?php include('_modal-logout.html')?>
@@ -339,6 +345,12 @@
                     title: 'Form successfully modified.'
                 })
             });
+            $('.swalArchive').click(function() {
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Form successfully set to active.'
+                })
+            });
         });
 
         $(document).ready(function(){
@@ -347,6 +359,8 @@
                     echo '$("#swalSuccess").trigger("click");';
                 if(isset($_GET['edit']))
                     echo '$("#swalEdit").trigger("click");';
+                if(isset($_GET['archived']))
+                    echo '$("#swalArchive").trigger("click");';
             ?>
         });
     </script>

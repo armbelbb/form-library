@@ -2,13 +2,18 @@
     include("db_connection.php");
     session_start();
 
+    if(isset($_GET["logout"])){
+        session_destroy();
+        header("Location: login/index.php");
+    }
+
     if(isset($_POST["logout"])){
         session_destroy();
         header("Location: login/index.php");
     }
 
     if(isset($_POST["login"])){
-        $sql = "SELECT * FROM accounts WHERE email = '$_POST[email]' AND password = '$_POST[password]'";
+        $sql = "SELECT * FROM accounts WHERE email = '$_POST[email]' AND password = '$_POST[password]' AND status = 'Active'";
         $account = $conn->query($sql);
         if($account->num_rows > 0){
             foreach($account as $data){
@@ -65,7 +70,8 @@
                 '$filename2',
                 '$filename3',
                 '$_POST[form_description]',
-                '$_POST[form_link]'
+                '$_POST[form_link]',
+                'Active'
             )";
         $conn->query($sql);
         header("Location: forms-library.php?success=1");
@@ -81,6 +87,18 @@
             ";
         $conn->query($sql);
         header("Location: forms-library.php?edit=1");
+    }
+
+    if(isset($_POST["archiveForm"])){
+        $sql = "UPDATE forms SET
+                status = '$_POST[status]' 
+                WHERE id = $_POST[form_id];
+            ";
+        $conn->query($sql);
+        if($_POST['status'] == 'Active')
+            header("Location: forms-library.php?archived=1");
+        else
+            header("Location: forms-archived.php?archived=1");
     }
 
     if(isset($_POST["requestForm"])){
@@ -132,6 +150,38 @@
                 '$_POST[request_concerns]'
             )";
         $conn->query($sql);
-        header("Location: forms-request.php?reported=1");
+        header("Location: forms-request-reported.php?reported=1");
+    }
+
+    if(isset($_POST["addNewAccount"])){
+        $sql = "INSERT INTO accounts VALUES(
+                id, 
+                '$_POST[email]',
+                '$_POST[password]',
+                '$_POST[display_name]',
+                '$_POST[contact_num]',
+                '$_POST[type]',
+                'Active'
+            )";
+        $conn->query($sql);
+        header("Location: manage-users.php?success=1");
+    }
+
+    if(isset($_POST["accountStatus"])){
+        $sql = "UPDATE accounts SET 
+                status = '$_POST[status]' 
+                WHERE id = $_POST[account_id]";
+        $conn->query($sql);
+        header("Location: manage-users.php?status=1");
+    }
+
+    if(isset($_POST["updateAccount"])){
+        $sql = "UPDATE accounts SET 
+                display_name = '$_POST[display_name]', 
+                email = '$_POST[email]', 
+                contact_num = '$_POST[contact_num]' 
+                WHERE id = $_POST[account_id]";
+        $conn->query($sql);
+        header("Location: manage-users.php?update=1");
     }
 ?>

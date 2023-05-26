@@ -10,5 +10,4 @@
 	$pword = "Sst!1234";
 	$dbname = "u119951004_formvault";
 	$conn = new mysqli($server, $uname, $pword, $dbname);
-	
 ?>

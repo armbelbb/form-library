@@ -35,7 +35,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php include('_sidebar-client.html')?>
+        <?php include('_sidebar-client.php')?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
