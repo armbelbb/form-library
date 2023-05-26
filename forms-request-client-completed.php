@@ -37,7 +37,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php include('_sidebar-client.html')?>
+        <?php include('_sidebar-client.php')?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -66,16 +66,17 @@
                                         <tr>
                                             <td>Form Name</td>
                                             <td>Form Reference ID</td>
-                                            <td>Requesting District</td>
+                                            <td>Date Requested</td>
+                                            <td>Date Last Updated</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $sql = "SELECT A.*, B.*, C.* 
-                                                        FROM form_requests as A 
-                                                        LEFT JOIN forms as B ON B.id = A.form_id 
-                                                        LEFT JOIN accounts as C ON C.id = A.account_id 
-                                                        WHERE A.status = 'Completed'";
+                                            $sql = "SELECT A.id as form_request_id,A.*, B.* 
+                                                    FROM form_requests as A 
+                                                    LEFT JOIN forms as B ON B.id = A.form_id 
+                                                    WHERE A.account_id = $_SESSION[account_id] 
+                                                    AND A.status = 'Completed'";
                                             $requests = $conn->query($sql);
                                             foreach($requests as $request){
                                                 echo "<tr>";
@@ -87,7 +88,8 @@
                                                         echo "<td class='align-middle'>$request[form_name]</td>";
                                                         echo "<td class='align-middle'>$request[reference_id]</td>";
                                                     }
-                                                    echo "<td class='align-middle'>$request[display_name]</td>";
+                                                    echo "<td>" . date('F d, Y  g:i:A', strtotime($request['request_date'])) . "</td>";
+                                                    echo "<td>" . date('F d, Y  g:i:A', strtotime($request['last_update_date'])) . "</td>";
                                                 echo "</tr>";
                                             }
                                         ?>

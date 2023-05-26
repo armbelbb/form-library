@@ -26,8 +26,6 @@
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="vendor/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 
 </head>
 
@@ -37,7 +35,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php include('_sidebar.html')?>
+        <?php include('_sidebar.php')?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -194,7 +192,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-    <button type="button" class="swalReport" id="swalReport">HIDDEN BTN</button>
 
     <!-- Logout Modal-->
     <?php include('_modal-logout.html')?>
@@ -209,31 +206,6 @@
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="js/greed/datatables-greed.js"></script>
-    <!-- SweetAlert2 -->
-    <script src="vendor/sweetalert2/sweetalert2.min.js"></script>
-    <script>
-        $(function() {
-            var Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000
-            });
-            $('.swalReport').click(function() {
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Request successfully reported.'
-                })
-            });
-        });
-
-        $(document).ready(function(){
-            <?php
-                if(isset($_GET['reported']))
-                    echo '$("#swalReport").trigger("click");';
-            ?>
-        });
-    </script>
 </body>
 
 </html>

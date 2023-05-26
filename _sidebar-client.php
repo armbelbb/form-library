@@ -1,11 +1,11 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index-client.php">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SST Admin</div>
+        <div class="sidebar-brand-text mx-3">SST Client</div>
     </a>
 
     <!-- Divider -->
@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="index-admin.php">
+        <a class="nav-link" href="index-client.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -22,18 +22,9 @@
     <hr class="sidebar-divider">
 
     <li class="nav-item active">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#formLibrary"
-            aria-expanded="true" aria-controls="formLibrary">
+        <a class="nav-link" href="forms-library-client.php">
             <i class="fas fa-file-alt"></i>
-            <span>Form Library</span>
-        </a>
-        <div id="formLibrary" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <!-- <h6 class="collapse-header">District Requests</h6> -->
-                <a class="collapse-item" href="forms-library.php">Add New Form</a>
-                <a class="collapse-item" href="forms-archived.php">Archive </a>
-            </div>
-        </div>
+            <span>Form Library</span></a>
     </li>
 
     <li class="nav-item active">
@@ -45,24 +36,22 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">District Requests</h6>
-                <a class="collapse-item" href="forms-request.php">Pending</a>
-                <a class="collapse-item" href="forms-request-completed.php">Completed </a>
-                <a class="collapse-item" href="forms-request-reported.php">Reported </a>
-                <a class="collapse-item" href="forms-request-canceled.php">Canceled </a>
+                <a class="collapse-item" href="forms-request-client.php">Pending</a>
+                <a class="collapse-item" href="forms-request-client-completed.php">Completed </a>
+                <a class="collapse-item" href="forms-request-client-reported.php">Reported </a>
+                <a class="collapse-item" href="forms-request-client-canceled.php">Canceled </a>
             </div>
         </div>
     </li>
 
-    <li class="nav-item active">
-        <a class="nav-link" href="manage-users.php">
-            <i class="fas fa-users"></i>
-            <span>Manage Users</span></a>
-    </li>
-
     <hr class="sidebar-divider">
 
+    <!-- Heading -->
+    <!-- <div class="sidebar-heading">
+        Interface
+    </div> -->
     <li class="nav-item active">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="actions.php?logout=1">
             <i class="fas fa-sign-out-alt"></i>
             <span>Logout</span></a>
     </li>

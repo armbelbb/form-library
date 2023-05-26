@@ -35,7 +35,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php include('_sidebar-client.html')?>
+        <?php include('_sidebar-client.php')?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -64,14 +64,90 @@
                                         <tr>
                                             <td>Form Name</td>
                                             <td>Form Reference ID</td>
-                                            <td>Requesting District</td>
                                             <td>Date Requested</td>
-                                            <td class="text-left">Reasons</td>
+                                            <td>Date Last Updated</td>
                                             <td class="text-center">Actions</td>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+                                        <?php
+                                            $sql = "SELECT A.id as form_request_id,A.*, B.* 
+                                                    FROM form_requests as A 
+                                                    LEFT JOIN forms as B ON B.id = A.form_id 
+                                                    WHERE A.account_id = $_SESSION[account_id] 
+                                                    AND A.status = 'Canceled'";
+                                            $requests = $conn->query($sql);
+                                            foreach($requests as $request){
+                                                echo "<tr>";
+                                                    echo "<td>";
+                                                        echo " <div class='form-check'>";
+                                                            echo "<input class='form-check-input' type='checkbox' value='' id='form1Checkbox$request[id]'>";
+                                                            echo "<label class='form-check-label' for='form1Checkbox'>";
+                                                                if($request['form_id'] == -1)
+                                                                    echo "NEW FORM REQUEST";
+                                                                else
+                                                                    echo "$request[form_name]";
+                                                            echo "</label>";
+                                                        echo " </div>";
+                                                    echo "</td>";
+                                                    if($request['form_id'] == -1)
+                                                        echo "<td>N/A</td>";
+                                                    else
+                                                    echo "<td>$request[reference_id]</td>";
+                                                    echo "<td>" . date('F d, Y  g:i:A', strtotime($request['request_date'])) . "</td>";
+                                                    echo "<td>" . date('F d, Y  g:i:A', strtotime($request['last_update_date'])) . "</td>";
+                                                    echo "<td>";
+                                                        echo "<button class='btn btn-outline-primary' onclick='$(\"#viewRequestModal$request[form_request_id]\").modal(\"toggle\")'>VIEW</button>";
+                                                        if($request['status'] == 'Pending'){
+                                                            echo "<a class='btn btn-danger' data-toggle='modal' data-target='#reportModal' onclick='$(\"#form_request_id\").val(\"$request[form_request_id]\")'>";
+                                                                echo "<i class='fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>";
+                                                                echo "CANCEL REQUEST";
+                                                            echo "</a>";
+                                                        }
+                                                    echo "</td>";
+                                                echo "</tr>";
+                                                echo "
+                                                    <div class='modal fade' id='viewRequestModal$request[form_request_id]'>
+                                                        <div class='modal-dialog modal-lg'>
+                                                            <div class='modal-content'>
+                                                                <div class='modal-header'>
+                                                                    <h4 class='modal-title font-weight-bold text-dark' id='modalTitle'>FORM REQUEST</h4>
+                                                                    <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                                                    <span aria-hidden='true'>&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class='modal-body'>
+                                                                    <div class='row'>
+                                                                        <div class='form-group col-12'>";
+                                                                            if($request['form_id'] == -1)
+                                                                                echo "<label class='font-weight-bold text-dark'>FORM NAME<ast class='text-danger'></ast>: NEW FORM REQUEST</label>";
+                                                                            else
+                                                                                echo "<label class='font-weight-bold text-dark'>FORM NAME<ast class='text-danger'></ast>: $request[form_name]</label>";
+                                                                        echo "</div>
+                                                                        <div class='form-group col-12'>
+                                                                            <label class='font-weight-bold text-dark'>EMAIL<ast class='text-danger'></ast>: $request[requestor_email]</label>
+                                                                        </div>
+                                                                        <div class='form-group col-12'>
+                                                                            <label class='font-weight-bold text-dark'>NAME<ast class='text-danger'></ast>: $request[requestor_name]</label>
+                                                                        </div>
+                                                                        <div class='form-group col-12'>
+                                                                            <label class='font-weight-bold text-dark'>PHONE NUMBER<ast class='text-danger'></ast>: $request[phone_number]</label>
+                                                                        </div>
+                                                                        <div class='form-group col-12'>
+                                                                            <label class='font-weight-bold text-dark'>NOTES:</label>
+                                                                            <textarea class='form-control' rows='3' name='form_description' readonly>$request[request_notes]</textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class='modal-footer'>
+                                                                    <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ";
+                                            }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
