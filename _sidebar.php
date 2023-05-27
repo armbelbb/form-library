@@ -1,12 +1,12 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">SST Admin</div>
-    </a>
+    <a class="sidebar-brand d-flex align-items-center justify-content-center my-5" href="index.php">
+    <div class="sidebar-brand-text my-5">
+        <img src="img/SchoolSource01.png" alt="" width="100%">
+        <div class="mt-3 sidebar-brand-icon">SST Admin</div>
+    </div>
+</a>
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
