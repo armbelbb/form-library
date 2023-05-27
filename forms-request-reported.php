@@ -92,8 +92,8 @@
                                                         echo "<td>$request[reference_id]</td>";
                                                     echo "<td>$request[display_name]</td>";
                                                     echo "<td>" . date('F d, Y  g:i:A', strtotime($request['request_date'])) . "</td>";
-                                                    echo "<td>";
-                                                        echo "<button class='btn btn-outline-primary' onclick='$(\"#viewRequestModal$request[form_request_id]\").modal(\"toggle\")'>VIEW</button>&nbsp";
+                                                    echo "<td class='text-center'>";
+                                                        echo "<button class='btn btn-primary' onclick='$(\"#viewRequestModal$request[form_request_id]\").modal(\"toggle\")'>VIEW</button>&nbsp";
                                                     echo "</td>";
                                                 echo "</tr>";
                                                 echo "
