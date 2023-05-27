@@ -65,8 +65,8 @@
                     <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary" style="display: flex; justify-content: space-between; align-items: center;">
-                            <span>Manage District</span>
-                            <button class="btn btn-outline-primary" onclick="$('#addNewAccountModal').modal('toggle')">Add Users</button>
+                            <span>Manage Users</span>
+                            <button class="btn btn-outline-info" onclick="$('#addNewAccountModal').modal('toggle')">Add Users</button>
                         </h6>
                     </div>
                     <!-- ADD NEW FORM MODAL -->
