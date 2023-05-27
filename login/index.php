@@ -60,7 +60,7 @@
 						<a class="txt1" href="#">
 							Forgot Password?<br>
 							<br>
-							Powered by Ondemand-Innovation, LLC
+							Powered by Ondemand-Innovation, LLC <img src="../img/OndemandInnovation 02.png" width="50px" height="auto">
 						</a>
 					</div>
 				</form>
