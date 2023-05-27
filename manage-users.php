@@ -143,7 +143,7 @@
                                                     echo "<td class='align-middle'>$account[type]</td>";
                                                     echo "<td class='text-right align-middle'>";
                                                         echo "<button class='btn btn-info' onclick='$(\"#updateAccountModal$account[id]\").modal(\"toggle\")'>Modify</button>&nbsp";
-                                                        echo "<button class='btn btn-success'>Reset Password</button>&nbsp";
+                                                        echo "<button class='btn btn-warning'>Reset Password</button>&nbsp";
                                                         if($account['status'] == 'Inactive')
                                                             echo "<button class='btn btn-primary' onclick='$(\"#accountStatusModal$account[id]\").modal(\"toggle\")'>Activate</button>";
                                                         else if($account['status'] == 'Active' && $account['id'] != $_SESSION['account_id'])
