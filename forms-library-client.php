@@ -95,7 +95,7 @@
                                                             echo "<td class='align-middle'>$form[reference_id]</td>";
                                                             echo "<td class='text-right'>";
                                                                 echo "<button class='btn btn-primary' onclick='$(\"#viewFormModal$form[id]\").modal(\"toggle\")'>View Form</button>&nbsp";
-                                                                echo "<button class='btn btn-outline-success' onclick='$(\"#viewWorkflow$form[id]\").modal(\"toggle\")'>Request</button>";
+                                                                echo "<button class='btn btn-success text-dark' onclick='$(\"#viewWorkflow$form[id]\").modal(\"toggle\")'>Request</button>";
                                                             echo "</td>";
                                                         echo "</tr>";
                                                         $workflow = $form['workflow'] == "" ? "img/no_workflow.png" : "uploads/$form[workflow]";
