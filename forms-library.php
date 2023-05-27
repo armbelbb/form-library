@@ -89,7 +89,7 @@
                                                 echo "<tr>";
                                                     echo "<td class='align-middle'>$form[form_name]</td>";
                                                     echo "<td class='align-middle'>$form[reference_id]</td>";
-                                                    echo "<td class='align-right'>";
+                                                    echo "<td class='text-right'>";
                                                         echo "<button class='btn btn-outline-primary' onclick='$(\"#viewFormModal$form[id]\").modal(\"toggle\")'>View Form</button>&nbsp";
                                                         echo "<button class='btn btn-outline-info' onclick='$(\"#updateFormModal$form[id]\").modal(\"toggle\")'>Modify</button>&nbsp";
                                                         echo "<button class='btn btn-outline-danger' onclick='$(\"#archiveFormModal$form[id]\").modal(\"toggle\")'>Archive Form</button>";
