@@ -12,7 +12,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item">
         <a class="nav-link" href="index-client.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
@@ -21,13 +21,13 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <li class="nav-item active">
+    <li class="nav-item">
         <a class="nav-link" href="forms-library-client.php">
             <i class="fas fa-file-alt"></i>
             <span>Form Library</span></a>
     </li>
 
-    <li class="nav-item active">
+    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-inbox"></i>
@@ -50,7 +50,7 @@
     <!-- <div class="sidebar-heading">
         Interface
     </div> -->
-    <li class="nav-item active">
+    <li class="nav-item">
         <a class="nav-link" href="actions.php?logout=1">
             <i class="fas fa-sign-out-alt"></i>
             <span>Logout</span></a>
