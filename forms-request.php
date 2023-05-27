@@ -90,13 +90,13 @@
                                                     echo "<td>$request[display_name]</td>";
                                                     echo "<td>" . date('F d, Y  g:i:A', strtotime($request['request_date'])) . "</td>";
                                                     echo "<td>";
-                                                        echo "<button class='btn btn-outline-primary' onclick='$(\"#viewRequestModal$request[form_request_id]\").modal(\"toggle\")'>VIEW</button>&nbsp";
+                                                        echo "<button class='btn btn-primary' onclick='$(\"#viewRequestModal$request[form_request_id]\").modal(\"toggle\")'>VIEW</button>&nbsp";
                                                         echo "<a class='btn btn-success' onclick='$(\"#completeRequestModal$request[form_request_id]\").modal(\"toggle\")'>";
-                                                            echo "<i class='fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>";
+                                                            // echo "<i class='fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>";
                                                             echo "COMPLETE";
                                                         echo "</a>&nbsp";
                                                         echo "<a class='btn btn-danger' data-toggle='modal' data-target='#reportModal' onclick='$(\"#form_request_id\").val(\"$request[form_request_id]\")'>";
-                                                            echo "<i class='fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>";
+                                                            // echo "<i class='fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>";
                                                             echo "REPORT/CONCERN";
                                                         echo "</a>";
                                                     echo "</td>";
