@@ -50,7 +50,7 @@
     <!-- <div class="sidebar-heading">
         Interface
     </div> -->
-    <li class="nav-item active">
+    <li class="nav-item  ">
         <a class="nav-link" href="actions.php?logout=1">
             <i class="fas fa-sign-out-alt"></i>
             <span>Logout</span></a>
