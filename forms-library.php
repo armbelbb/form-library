@@ -63,7 +63,7 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary" style="display: flex; justify-content: space-between; align-items: center;">
                                 <span> SST Forms </span>
-                                <button class="btn btn-outline-primary float-right" onclick="$('#addNewFormModal').modal('toggle')">Add New Form</button>
+                                <button class="btn btn-primary float-right" onclick="$('#addNewFormModal').modal('toggle')">Add New Form</button>
                             </h6>
                         </div>
                         <div class="card-body">
