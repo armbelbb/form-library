@@ -4,6 +4,12 @@
         header('Location: login/index.php');
         exit();
     } 
+    else{
+        if($_SESSION['type'] == 'Administrator')
+            header('Location: index-admin.php');
+        else
+            header('Location: index-client.php');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
