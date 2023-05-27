@@ -7,21 +7,22 @@
 
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
-        <!-- Nav Item - Home -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
+        <!-- Nav Item - Notification -->
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell"></i>
                 &nbsp;Notification
             </a>
-            <!-- Notification Dropdown -->
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownNotification">
+            <!-- Dropdown - Notification -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="notificationDropdown">
                 <!-- Dropdown header -->
                 <h6 class="dropdown-header">Notifications</h6>
                 <!-- Dropdown items -->
                 <a class="dropdown-item" href="#">Notification 1</a>
                 <a class="dropdown-item" href="#">Notification 2</a>
                 <a class="dropdown-item" href="#">Notification 3</a>
-                <!-- Dropdown footer -->
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">View All Notifications</a>
             </div>
@@ -41,3 +42,19 @@
     </ul>
 
 </nav>
+
+<style>
+    .nav-item.dropdown.no-arrow .nav-link.dropdown-toggle.active {
+        color: #845EC2; /* Replace with the desired active color */
+    }
+</style>
+
+<script>
+    // JavaScript to handle active state of the notification button
+    document.addEventListener('DOMContentLoaded', function() {
+        var notificationButton = document.getElementById('notificationDropdown');
+        notificationButton.addEventListener('click', function() {
+            this.classList.toggle('active');
+        });
+    });
+</script>
