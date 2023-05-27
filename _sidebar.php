@@ -12,10 +12,11 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item">
+    <li class="nav-item colorchange">
         <a class="nav-link" href="index-admin.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
+            <span>Dashboard</span>
+        </a>
     </li>
 
     <!-- Divider -->
@@ -29,7 +30,6 @@
         </a>
         <div id="formLibrary" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <!-- <h6 class="collapse-header">District Requests</h6> -->
                 <a class="collapse-item" href="forms-library.php">Form Lists</a>
                 <a class="collapse-item" href="forms-archived.php">Archive </a>
             </div>
@@ -56,7 +56,8 @@
     <li class="nav-item">
         <a class="nav-link" href="manage-users.php">
             <i class="fas fa-users"></i>
-            <span>Manage Users</span></a>
+            <span>Manage Users</span>
+        </a>
     </li>
 
     <hr class="sidebar-divider">
@@ -64,7 +65,8 @@
     <li class="nav-item">
         <a class="nav-link" href="actions.php?logout=1">
             <i class="fas fa-sign-out-alt"></i>
-            <span>Logout</span></a>
+            <span>Logout</span>
+        </a>
     </li>
 
     <!-- Sidebar Toggler (Sidebar) -->
@@ -72,10 +74,30 @@
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
 
-    <!-- Sidebar Message -->
-    <!-- <div class="sidebar-card d-none d-lg-flex">
-        <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-        <p class="text-center mb-2"><strong></strong></p>
-    </div> -->
-
 </ul>
+
+<!-- <style>
+    .nav-item.active a {
+        color: red; /* Change the color to your desired active color */
+    }
+</style> -->
+
+<script>
+    // JavaScript to handle active state of the button
+    document.addEventListener('DOMContentLoaded', function() {
+        var navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(function(navItem) {
+            navItem.addEventListener('click', function(event) {
+                var activeItem = document.querySelector('.nav-item.active');
+                if (activeItem) {
+                    activeItem.classList.remove('active');
+                }
+                this.classList.add('active');
+            });
+        });
+
+        // Add "active" class to the specific li element
+        var specificNavItem = document.querySelector('.nav-item.colorchange');
+        specificNavItem.classList.add('active');
+    });
+</script>
