@@ -2,11 +2,11 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center my-5" href="index.php">
-    <div class="sidebar-brand-text my-5">
-        <img src="img/SchoolSource01.png" alt="" width="100%">
-        <div class="mt-3 sidebar-brand-icon">SST Admin</div>
-    </div>
-</a>
+        <div class="sidebar-brand-text my-5">
+            <img src="img/SchoolSource01.png" alt="" width="100%">
+            <div class="mt-3 sidebar-brand-icon">SST Admin</div>
+        </div>
+    </a>
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
@@ -30,7 +30,7 @@
         <div id="formLibrary" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <!-- <h6 class="collapse-header">District Requests</h6> -->
-                <a class="collapse-item" href="forms-library.php">Add New Form</a>
+                <a class="collapse-item" href="forms-library.php">Form Lists</a>
                 <a class="collapse-item" href="forms-archived.php">Archive </a>
             </div>
         </div>
