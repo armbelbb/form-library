@@ -62,7 +62,7 @@
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">
                                         <!-- <button class="btn btn-outline-primary">Add New Form</button> -->
-                                        SST Form Lists
+                                        SST Forms Library
                                     </h6>
                                 </div>
                                 <div class="card-body">
@@ -95,7 +95,7 @@
                                                             echo "<td class='align-middle'>$form[reference_id]</td>";
                                                             echo "<td class='text-right'>";
                                                                 echo "<button class='btn btn-primary' onclick='$(\"#viewFormModal$form[id]\").modal(\"toggle\")'>View Form</button>&nbsp";
-                                                                echo "<button class='btn btn-success text-dark' onclick='$(\"#viewWorkflow$form[id]\").modal(\"toggle\")'>Request</button>";
+                                                                echo "<button class='btn btn-info' onclick='$(\"#viewWorkflow$form[id]\").modal(\"toggle\")'>Request</button>";
                                                             echo "</td>";
                                                         echo "</tr>";
                                                         $workflow = $form['workflow'] == "" ? "img/no_workflow.png" : "uploads/$form[workflow]";
@@ -169,6 +169,7 @@
                             <div class="row mb-1">
                                 <?php include('_categorylist-client.php')?>
                             </div>
+                            <!-- Request New Form -->
                             <div class="row">
                                 <?php include('_forms-neednew.php')?>
                             </div>

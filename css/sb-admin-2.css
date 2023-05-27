@@ -10339,14 +10339,12 @@ a:focus {
 }
 
 .sidebar .nav-item .nav-link span {
-  font-size: 30px;
+  font-size: 0.65rem;
   display: block;
 }
 
 .sidebar .nav-item.active .nav-link {
   font-weight: 700;
-  color: #fff;
-    background-color: #ccc;
 }
 
 .sidebar .nav-item .collapse {
@@ -10545,7 +10543,7 @@ a:focus {
     margin-right: 0.25rem;
   }
   .sidebar .nav-item .nav-link span {
-    font-size: 30px;
+    font-size: 0.85rem;
     display: inline;
   }
   .sidebar .nav-item .nav-link[data-toggle="collapse"]::after {
