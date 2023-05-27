@@ -91,7 +91,7 @@
                                                     echo "<td>" . date('F d, Y  g:i:A', strtotime($request['request_date'])) . "</td>";
                                                     echo "<td class='text-right'>";
                                                         echo "<button class='btn btn-primary' onclick='$(\"#viewRequestModal$request[form_request_id]\").modal(\"toggle\")'>VIEW</button>&nbsp";
-                                                        echo "<a class='btn btn-success' onclick='$(\"#completeRequestModal$request[form_request_id]\").modal(\"toggle\")'>";
+                                                        echo "<a class='btn btn-info' onclick='$(\"#completeRequestModal$request[form_request_id]\").modal(\"toggle\")'>";
                                                             // echo "<i class='fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>";
                                                             echo "COMPLETE";
                                                         echo "</a>&nbsp";
