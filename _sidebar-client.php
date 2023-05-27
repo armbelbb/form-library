@@ -1,11 +1,11 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index-client.php">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+    <a class="sidebar-brand d-flex align-items-center justify-content-center my-5" href="index.php">
+        <div class="sidebar-brand-text my-5">
+            <img src="img/SchoolSource01.png" alt="" width="100%">
+            <div class="mt-3 sidebar-brand-icon">SST Client</div>
         </div>
-        <div class="sidebar-brand-text mx-3">SST Client</div>
     </a>
 
     <!-- Divider -->
