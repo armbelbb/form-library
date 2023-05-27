@@ -22,7 +22,7 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <li class="nav-item">
+    <li class="nav-item colorchange">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#formLibrary"
             aria-expanded="true" aria-controls="formLibrary">
             <i class="fas fa-file-alt"></i>
@@ -36,7 +36,7 @@
         </div>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item colorchange">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-inbox"></i>
@@ -53,7 +53,7 @@
         </div>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item colorchange">
         <a class="nav-link" href="manage-users.php">
             <i class="fas fa-users"></i>
             <span>Manage Users</span>
@@ -62,7 +62,7 @@
 
     <hr class="sidebar-divider">
 
-    <li class="nav-item">
+    <li class="nav-item colorchange">
         <a class="nav-link" href="actions.php?logout=1">
             <i class="fas fa-sign-out-alt"></i>
             <span>Logout</span>
