@@ -78,6 +78,42 @@
     }
 
     if(isset($_POST["updateForm"])){
+        if($_FILES['thumbnail']['size'] > 0){
+            $sql = "SELECT thumbnail FROM forms WHERE id = $_POST[form_id]";
+            $theFiles = $conn->query($sql);
+            foreach($theFiles as $file){
+                unlink("uploads/$file[thumbnail]");
+            }
+            $tmpFilePath2 = $_FILES["thumbnail"]['tmp_name'];
+            $filePath2 = $_FILES["thumbnail"]['name'];
+            $ext2  = pathinfo($filePath2, PATHINFO_EXTENSION);
+            $newFilePath2 = "uploads/$filePath2";
+            $filename2 = "$filePath2";
+            move_uploaded_file($tmpFilePath2, $newFilePath2);
+            $sql = "UPDATE forms SET
+                thumbnail = '$filename2' 
+                WHERE id = $_POST[form_id];
+            ";
+            $conn->query($sql);
+        }
+        if($_FILES['workflow']['size'] > 0){
+            $sql = "SELECT workflow FROM forms WHERE id = $_POST[form_id]";
+            $theFiles = $conn->query($sql);
+            foreach($theFiles as $file){
+                unlink("uploads/$file[workflow]");
+            }
+            $tmpFilePath3 = $_FILES["workflow"]['tmp_name'];
+            $filePath3 = $_FILES["workflow"]['name'];
+            $ext3  = pathinfo($filePath3, PATHINFO_EXTENSION);
+            $newFilePath3 = "uploads/$filePath3";
+            $filename3 = "$filePath3";
+            move_uploaded_file($tmpFilePath3, $newFilePath3);
+            $sql = "UPDATE forms SET
+                workflow = '$filename3' 
+                WHERE id = $_POST[form_id];
+            ";
+            $conn->query($sql);
+        }
         $sql = "UPDATE forms SET
                 form_name = '$_POST[form_name]',
                 reference_id = '$_POST[reference_id]',

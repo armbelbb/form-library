@@ -147,7 +147,7 @@
                                                                     </button>
                                                                 </div>
                                                                 <div class='modal-body'>
-                                                                    <form method='POST' action='actions.php' id='updateForm$form[id]'>
+                                                                    <form method='POST' action='actions.php' enctype='multipart/form-data' id='updateForm$form[id]'>
                                                                         <div class='row'>
                                                                             <div class='form-group col-12'>
                                                                                 <label class='font-weight-bold text-dark'>FORM NAME<ast class='text-danger'>*</ast>:</label>
@@ -164,6 +164,14 @@
                                                                             <div class='form-group col-12'>
                                                                                 <label class='font-weight-bold text-dark'>DESCRIPTION:</label>
                                                                                 <textarea class='form-control' rows='3' name='form_description'>$form[form_description]</textarea>
+                                                                            </div>
+                                                                            <div class='form-group col-6'>
+                                                                                <label class='font-weight-bold text-dark'>New Thumbnail:</label>
+                                                                                <input type='file' class='form-control' name='thumbnail'>
+                                                                            </div>
+                                                                            <div class='form-group col-6'>
+                                                                                <label class='font-weight-bold text-dark'>New Workflow:</label>
+                                                                                <input type='file' class='form-control' name='workflow'>
                                                                             </div>
                                                                         </div>
                                                                         <input type='hidden' name='form_id' value='$form[id]'>

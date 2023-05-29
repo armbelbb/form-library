@@ -14,12 +14,14 @@
                         LEFT JOIN categories as B ON B.id = A.category_id 
                         ORDER BY A.id DESC";
             }
+            $paginationCtr = 0;
+            $flagVisible = "block";
             $forms = $conn->query($sql);
             foreach($forms as $form){
+                if($paginationCtr > 2) $flagVisible = 'none';
                 $workflow = $form['workflow'] == "" ? "img/no_workflow.png" : "uploads/$form[workflow]";
                 $thumbnail = $form['thumbnail'] == "" ? "img/no_workflow.png" : "uploads/$form[thumbnail]";
-                $attachment = $form['attachment'] == "" ? "N/A" : "$form[attachment]";
-                echo "<div class='col-sm-4 text-center'>";
+                echo "<div class='col-sm-4 text-center formCard2' style='display: $flagVisible;'>";
                     echo "<img src='$thumbnail' alt='$form[form_index]' class='img-thumbnail' style='object-fit: cover; height: 250px;' onclick='$(\"#updateFormModal$form[id]\").modal(\"toggle\")'>";
                     echo "<h3><a href='$form[link]' target='_blank'>$form[form_name]</a></h3>";
                 echo "</div>";
@@ -49,9 +51,6 @@
                                             <textarea class='form-control' rows='3' name='form_description' readonly>$form[form_description]</textarea>
                                         </div>
                                         <div class='form-group col-12'>
-                                            <label class='font-weight-bold text-dark'>ATTACHMENT<ast class='text-danger'></ast>: <a href='uploads/$form[attachment]' target='_blank'>$attachment</a></label>
-                                        </div>
-                                        <div class='form-group col-12'>
                                             <label class='font-weight-bold text-dark'><a href='$form[link]' target='_blank'>FORM LINK</a></label>
                                         </div>
                                         <div class='form-group col-12'>
@@ -69,7 +68,53 @@
                         </div>
                     </div>
                 ";
+                $paginationCtr++;
             }
+            $paginationPage = 2;
+            echo "<nav aria-label='Page navigation example'>";
+                echo "<ul class='pagination'>";
+                    echo "<li class='page-item'><a class='page-link' onclick='setPagination2(\"minus\")'>Previous</a></li>";
+                    echo "<li class='page-item'><a class='page-link' onclick='setPagination2(1)'>1</a></li>";
+                    while($paginationCtr > 3){
+                        echo "<li class='page-item'><a class='page-link' onclick='setPagination2($paginationPage)'>$paginationPage</a></li>";
+                        $paginationCtr-=3;
+                        $paginationPage++;
+                    }
+                    echo "<li class='page-item'><a class='page-link' onclick='setPagination2(\"plus\")'>Next</a></li>";
+                echo "</ul>";
+            echo "</nav>";
         ?>
     </div>
 </div>
+<script>
+    var currentPage = 1;
+    var maxPage = <?php echo $paginationPage - 1;?>;
+
+    function setPagination2(page){
+        var cards = document.getElementsByClassName('formCard2');
+        if(page == 'minus' && currentPage > 1){
+            currentPage = parseInt(currentPage) - 1;
+        }
+        else if(page == 'plus' && currentPage < maxPage){
+            currentPage = parseInt(currentPage) + 1;
+        }
+        else if(isInt2(page)){
+            currentPage = page;
+        }
+        var toGet = (parseInt(currentPage) * 3) - 2;
+        var showCards = [parseInt(toGet) - 1, toGet, parseInt(toGet) + 1];
+        for(var i = 0; i < cards.length; i++){
+            if(showCards.includes(i)){
+                cards[i].style.display = "block"; // or
+            }
+            else{
+                cards[i].style.display = "none"; // or
+            }
+        }
+    }
+
+    function isInt2(value) {
+        var x = parseFloat(value);
+        return !isNaN(value) && (x | 0) === x;
+    }
+</script>
