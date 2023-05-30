@@ -51,17 +51,19 @@
                         <div class="row">
                             <!-- this is the first column -->
                             <div class="col-md-9">
-                                <div class="row mb-5">
+                                <h4>Most Used Forms</h4>
+                                <hr class="mb-3">
+                                <div class="row mb-0">
                                     <?php include('_forms-mostused.php')?>
                                 </div>
-                                <h3>Most Used Forms</h3>
-
                                 <hr class="mb-5">
 
+                                <h4>Latest Forms</h4>
+                                <hr class="mb-3">
                                 <div class="row">
                                     <?php include('_forms-latest.php')?>
                                 </div>
-                                <h3>Latest Forms</h3>
+                                <hr class="mb-5">
                             </div>
                             <!-- this is the 2nd column -->
                             <div class="col-md-3">
@@ -81,7 +83,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <!-- <?php include('_footer.html')?> -->
+            <?php include('_footer.html')?>
             <!-- End of Footer -->
 
         </div>
