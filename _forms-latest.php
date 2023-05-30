@@ -24,8 +24,8 @@
                 $workflow = $form['workflow'] == "" ? "img/no_workflow.png" : "uploads/$form[workflow]";
                 $thumbnail = $form['thumbnail'] == "" ? "img/no_workflow.png" : "uploads/$form[thumbnail]";
                 echo "<div class='col-sm-4 text-center formCard2' style='display: $flagVisible;'>";
-                    echo "<img src='$thumbnail' alt='$form[form_index]' class='img-thumbnail' style='object-fit: cover; height: 250px;' onclick='$(\"#updateFormModal$form[id]\").modal(\"toggle\")'>";
-                    echo "<h3><a href='$form[link]' target='_blank'>$form[form_name]</a></h3>";
+                    echo "<img src='$thumbnail' alt='$form[form_index]' class='img-thumbnail mb-3' style='object-fit: cover; height: 250px;' onclick='$(\"#updateFormModal$form[id]\").modal(\"toggle\")'>";
+                    echo "<h4><a href='$form[link]' target='_blank'>$form[form_name]</a></h4>";
                 echo "</div>";
                 echo "
                     <div class='modal fade' id='updateFormModal$form[id]'>
