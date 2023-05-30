@@ -95,7 +95,7 @@
                                                             echo "<td class='align-middle'>$form[reference_id]</td>";
                                                             echo "<td class='text-right'>";
                                                                 echo "<button class='btn btn-primary' onclick='$(\"#viewFormModal$form[id]\").modal(\"toggle\")'>View Form</button>&nbsp";
-                                                                echo "<button class='btn btn-info' onclick='$(\"#viewWorkflow$form[id]\").modal(\"toggle\")'>Request</button>";
+                                                                // echo "<button class='btn btn-info' onclick='$(\"#viewWorkflow$form[id]\").modal(\"toggle\")'>Request</button>";
                                                             echo "</td>";
                                                         echo "</tr>";
                                                         $workflow = $form['workflow'] == "" ? "img/no_workflow.png" : "uploads/$form[workflow]";
@@ -128,11 +128,15 @@
                                                                                     <label class='font-weight-bold text-dark'>WORKFLOW<ast class='text-danger'></ast>: $form[category_name]</label>
                                                                                     <img src='$workflow' class='img-fluid' alt='IMAGE NOT FOUND'>
                                                                                 </div>
+                                                                                <div class='form-group embed-responsive embed-responsive-16by9 col-12'>
+                                                                                    <iframe src='$form[link]' class='embed-responsive-item' title='TheForm'></iframe>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class='modal-footer'>
-                                                                            <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
-                                                                        </div>
+                                                                            <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>";
+                                                                            echo "<button type='button' class='btn btn-primary' onclick='loadRequestModal($form[id])'>Request Form</button>";
+                                                                        echo "</div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -233,6 +237,15 @@
 
     <!-- Page level custom scripts -->
     <script src="js/greed/datatables-greed.js"></script>
+    <script>
+        function loadRequestModal(formId){
+            $('#form_id option[value=' + formId + ']').attr('selected','selected');
+            $('#form_id2').val($('#form_id').val());
+            $('#form_id2').prop('disabled', false);
+            $('#form_id').prop('disabled', 'disabled');
+            $("#requestNewFormModal").modal("toggle");
+        }
+    </script>
 
 </body>
 

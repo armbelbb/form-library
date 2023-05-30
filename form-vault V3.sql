@@ -14,8 +14,8 @@
 
 
 -- Dumping database structure for form_vault
-CREATE DATABASE IF NOT EXISTS `form_vault` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `form_vault`;
+-- CREATE DATABASE IF NOT EXISTS `form_vault` /*!40100 DEFAULT CHARACTER SET latin1 */;
+-- USE `form_vault`;
 
 -- Dumping structure for table form_vault.accounts
 CREATE TABLE IF NOT EXISTS `accounts` (
@@ -23,19 +23,16 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `display_name` varchar(255) DEFAULT NULL,
-  `contact_num` varchar(255) DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table form_vault.accounts: ~2 rows (approximately)
 DELETE FROM `accounts`;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` (`id`, `email`, `password`, `display_name`, `contact_num`, `type`, `status`) VALUES
-	(1, 'sstforms@farmingdaleschools.org', 'Dalers', 'Farmingdale_SST', NULL, 'Administrator', 'Active'),
-	(2, 'client1@sample.com', 'helloworld', 'Client One', NULL, 'Client', 'Active'),
-	(3, 'client2@sample.com', 'secret', 'Client 2', '211-Jabi Delivery', 'Client', 'Active');
+INSERT INTO `accounts` (`id`, `email`, `password`, `display_name`, `type`) VALUES
+	(1, 'sstforms@farmingdaleschools.org', 'Dalers', 'Farmingdale_SST', 'Administrator'),
+	(2, 'client1@sample.com', 'helloworld', 'Client One', 'Client');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 
 -- Dumping structure for table form_vault.categories
@@ -68,7 +65,6 @@ CREATE TABLE IF NOT EXISTS `forms` (
   `workflow` varchar(255) DEFAULT NULL,
   `form_description` text,
   `link` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

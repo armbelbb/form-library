@@ -10,45 +10,53 @@
             <div class="modal-body">
                 <form method="POST" action="actions.php" id="requestForm">
                     <div class="row">
-                        <div class="form-group col-7">
-                            <label class="font-weight-bold text-dark" for="form_category">FORM NAME<ast class="text-danger">*</ast>:</label>
-                            <select class="form-control" name="form_id" id="form_id" required>
-                                <option value="" selected disabled>Choose an option</option>
-                                <?php
-                                    if(isset($_POST['category_id']) && $_POST['category_id'] != 'ALL'){
-                                        $sql = "SELECT A.*, B.category_name 
-                                                FROM forms as A 
-                                                LEFT JOIN categories as B ON B.id = A.category_id 
-                                                WHERE A.category_id = $_POST[category_id]";
-                                    }
-                                    else{
-                                        $sql = "SELECT A.*, B.category_name 
-                                                FROM forms as A 
-                                                LEFT JOIN categories as B ON B.id = A.category_id";
-                                    }
-                                    $forms = $conn->query($sql);
-                                    foreach($forms as $form){
-                                        echo "<option value='$form[id]'>$form[form_name]</option>";
-                                    }
-                                ?>
-                            </select>
+                        <div class="col-6">
+                            <div class="form-group col-12">
+                                <label class="font-weight-bold text-dark" for="form_category">FORM NAME<ast class="text-danger">*</ast>:</label>
+                                <select class="form-control" name="form_id" id="form_id" onchange="getFormThumbnail()" required>
+                                    <option value="" selected disabled>Choose an option</option>
+                                    <?php
+                                        if(isset($_POST['category_id']) && $_POST['category_id'] != 'ALL'){
+                                            $sql = "SELECT A.*, B.category_name 
+                                                    FROM forms as A 
+                                                    LEFT JOIN categories as B ON B.id = A.category_id 
+                                                    WHERE A.category_id = $_POST[category_id]";
+                                        }
+                                        else{
+                                            $sql = "SELECT A.*, B.category_name 
+                                                    FROM forms as A 
+                                                    LEFT JOIN categories as B ON B.id = A.category_id";
+                                        }
+                                        $forms = $conn->query($sql);
+                                        foreach($forms as $form){
+                                            echo "<option value='$form[id]'>$form[form_name]</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            <input type="hidden" name="form_id" id="form_id2" disabled>
+                            <div class="form-group col-12">
+                                <label class="font-weight-bold text-dark" for="district_name">DISTRICT NAME<ast class="text-danger">*</ast>:</label>
+                                <input type="text" class="form-control" name="district_name" id="district_name" value="<?php echo $_SESSION['display_name'];?>" readonly>
+                            </div>
+                            <div class="form-group col-12">
+                                <label class="font-weight-bold text-dark" for="requestor_email">EMAIL<ast class="text-danger">*</ast>:</label>
+                                <input type="email" class="form-control" name="requestor_email" id="requestor_email" required>
+                            </div>
+                            <div class="form-group col-12">
+                                <label class="font-weight-bold text-dark" for="requestor_name">NAME<ast class="text-danger">*</ast>:</label>
+                                <input type="text" class="form-control" name="requestor_name" id="requestor_name" required>
+                            </div>
+                            <div class="form-group col-12">
+                                <label class="font-weight-bold text-dark" for="phone_number">PHONE NUMBER<ast class="text-danger">*</ast>:</label>
+                                <input type="text" class="form-control" name="phone_number" id="phone_number" required>
+                            </div>
                         </div>
-                        <input type="hidden" name="form_id" id="form_id2" disabled>
-                        <div class="form-group col-7">
-                            <label class="font-weight-bold text-dark" for="district_name">DISTRICT NAME<ast class="text-danger">*</ast>:</label>
-                            <input type="text" class="form-control" name="district_name" id="district_name" value="<?php echo $_SESSION['display_name'];?>" readonly>
-                        </div>
-                        <div class="form-group col-7">
-                            <label class="font-weight-bold text-dark" for="requestor_email">EMAIL<ast class="text-danger">*</ast>:</label>
-                            <input type="email" class="form-control" name="requestor_email" id="requestor_email" required>
-                        </div>
-                        <div class="form-group col-7">
-                            <label class="font-weight-bold text-dark" for="requestor_name">NAME<ast class="text-danger">*</ast>:</label>
-                            <input type="text" class="form-control" name="requestor_name" id="requestor_name" required>
-                        </div>
-                        <div class="form-group col-7">
-                            <label class="font-weight-bold text-dark" for="phone_number">PHONE NUMBER<ast class="text-danger">*</ast>:</label>
-                            <input type="text" class="form-control" name="phone_number" id="phone_number" required>
+                        <div class="col-6">
+                            <div class="form-group col-12">
+                                <label class="font-weight-bold text-dark">THUMBNAIL</label>
+                                <img src="img/no_workflow.png" class='img-fluid' alt='IMAGE NOT FOUND' id="formRequestThumbnail">
+                            </div>
                         </div>
                         <div class="form-group col-12">
                             <label class="font-weight-bold text-dark" for="request_notes">NOTES:</label>
@@ -106,5 +114,18 @@
         $('#form_id2').prop('disabled', 'disabled');
         $('#form_id').prop('disabled', false);
         $("#requestNewFormModal").modal("toggle");
+    }
+
+    function getFormThumbnail(){
+        form_id = $('#form_id').val();
+        $.ajax({
+			url : "myAjax.php",
+	        type: "GET",
+	        dataType: "JSON",
+            data: {getFormThumbnail: "getFormThumbnail", id: form_id},
+	        success: function(results){
+                $('#formRequestThumbnail').attr('src', 'uploads/'+ results);
+			}
+	    });
     }
 </script>

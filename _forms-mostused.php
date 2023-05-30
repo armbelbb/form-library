@@ -5,12 +5,14 @@
                 $sql = "SELECT A.*, B.category_name 
                         FROM forms as A 
                         LEFT JOIN categories as B ON B.id = A.category_id 
-                        WHERE A.category_id = $_POST[category_id]";
+                        WHERE A.category_id = $_POST[category_id] 
+                        AND A.status = 'Active'";
             }
             else{
                 $sql = "SELECT A.*, B.category_name 
                         FROM forms as A 
-                        LEFT JOIN categories as B ON B.id = A.category_id";
+                        LEFT JOIN categories as B ON B.id = A.category_id 
+                        WHERE A.status = 'Active'";
             }
             $paginationCtr = 0;
             $flagVisible = "block";
@@ -55,12 +57,15 @@
                                             <label class='font-weight-bold text-dark'>WORKFLOW<ast class='text-danger'></ast>: $form[category_name]</label>
                                             <img src='$workflow' class='img-fluid' alt='IMAGE NOT FOUND'>
                                         </div>
+                                        <div class='form-group embed-responsive embed-responsive-16by9 col-12'>
+                                            <iframe src='$form[link]' class='embed-responsive-item' title='TheForm'></iframe>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class='modal-footer'>
                                     <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>";
                                     if($_SESSION['type'] == 'Client')
-                                    echo "<button type='button' class='btn btn-primary' onclick='loadRequestModal($form[id])'>Request Form</button>";
+                                    echo "<button type='button' class='btn btn-primary' onclick='loadRequestModal($form[id], \"$thumbnail\")'>Request Form</button>";
                                 echo "</div>
                             </div>
                         </div>
@@ -87,12 +92,13 @@
 <script>
     var currentPage = 1;
     var maxPage = <?php echo $paginationPage - 1;?>;
-    function loadRequestModal(formId){
+    function loadRequestModal(formId, thumbnail){
         $('#form_id option[value=' + formId + ']').attr('selected','selected');
         $('#form_id2').val($('#form_id').val());
         $('#form_id2').prop('disabled', false);
         $('#form_id').prop('disabled', 'disabled');
         $("#requestNewFormModal").modal("toggle");
+        $('#formRequestThumbnail').attr('src', thumbnail);
     }
 
     function setPagination(page){

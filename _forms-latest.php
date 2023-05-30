@@ -6,12 +6,14 @@
                         FROM forms as A 
                         LEFT JOIN categories as B ON B.id = A.category_id 
                         WHERE A.category_id = $_POST[category_id] 
+                        AND A.status = 'Active' 
                         ORDER BY A.id DESC";
             }
             else{
                 $sql = "SELECT A.*, B.category_name 
                         FROM forms as A 
                         LEFT JOIN categories as B ON B.id = A.category_id 
+                        WHERE A.status = 'Active' 
                         ORDER BY A.id DESC";
             }
             $paginationCtr = 0;

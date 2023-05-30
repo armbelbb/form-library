@@ -45,12 +45,11 @@
 
 <style>
     .nav-item.dropdown.no-arrow .nav-link.dropdown-toggle.active {
-        color: #845EC2; /* Replace with the desired active color */
+        color: #845EC2;
     }
 </style>
 
 <script>
-    // JavaScript to handle active state of the notification button
     document.addEventListener('DOMContentLoaded', function() {
         var notificationButton = document.getElementById('notificationDropdown');
         notificationButton.addEventListener('click', function() {
